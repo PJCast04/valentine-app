@@ -7,16 +7,15 @@ export default function Valentine() {
   const [noMoved, setNoMoved] = useState(false);
 
   const [noPosition, setNoPosition] = useState({
-    top: "50%",
+    top: "60%",
     left: "50%",
   });
 
-
-  const handleNoHover = () => {
+  const handleNoTap = () => {
     setSadLevel((prev) => Math.min(prev + 1, 5));
     setNoMoved(true);
 
-    const padding = 5;
+    const padding = 15; // safer on mobile
     const max = 100 - padding;
 
     setNoPosition({
@@ -37,6 +36,7 @@ export default function Valentine() {
           <h1 style={styles.title}>Will you be my Valentine? 💔</h1>
 
           <div style={styles.buttonContainer}>
+            {/* YES */}
             <button
               style={styles.yesButton}
               onClick={() => setAccepted(true)}
@@ -44,6 +44,7 @@ export default function Valentine() {
               Yes 💕
             </button>
 
+            {/* NO */}
             <button
               style={{
                 ...styles.noButton,
@@ -51,10 +52,10 @@ export default function Valentine() {
                 top: noMoved ? noPosition.top : undefined,
                 left: noMoved ? noPosition.left : undefined,
                 transform: noMoved ? "translate(-50%, -50%)" : "none",
-                opacity: sadLevel === 6? 0.4 : 1,
+                opacity: sadLevel === 67 ? 0.4 : 1,
               }}
-              onMouseEnter={sadLevel < 6 ? handleNoHover : undefined}
-              disabled={sadLevel === 6}
+              onClick={sadLevel < 67 ? handleNoTap : undefined}
+              disabled={sadLevel === 67}
             >
               No {["💔", "😟", "😞", "😢", "😭", "😛"][sadLevel]}
             </button>
@@ -69,7 +70,7 @@ export default function Valentine() {
             style={styles.image}
           />
           <h2>You said YES 💘</h2>
-          <p>I love you so much baby</p>
+          <p>I love you so much baby 💖</p>
         </div>
       )}
     </div>
@@ -78,32 +79,35 @@ export default function Valentine() {
 
 const styles = {
   container: {
-    height: "100vh",
+    minHeight: "100vh",
     width: "100vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     fontFamily: "sans-serif",
-    transition: "background 0.6s ease",
+    padding: "20px",
   },
 
   title: {
-    marginBottom: "20px",
+    marginBottom: "24px",
     color: "#333",
+    textAlign: "center",
+    fontSize: "clamp(22px, 6vw, 32px)",
   },
 
   buttonContainer: {
     display: "flex",
-    gap: "14px",
+    flexDirection: "column", // mobile-first
+    gap: "16px",
+    width: "100%",
+    maxWidth: "260px",
   },
 
   yesButton: {
-    
-    //position: "fixed",
-    padding: "12px 26px",
+    padding: "16px",
     fontSize: "18px",
-    borderRadius: "10px",
+    borderRadius: "12px",
     border: "none",
     backgroundColor: "#ff4d6d",
     color: "white",
@@ -111,31 +115,31 @@ const styles = {
   },
 
   noButton: {
-    padding: "12px 26px",
+    padding: "16px",
     fontSize: "18px",
-    borderRadius: "10px",
+    borderRadius: "12px",
     border: "none",
     backgroundColor: "#555",
     color: "white",
     cursor: "pointer",
-    transition: "top 0.15s ease, left 0.15s ease",
+    transition: "top 0.2s ease, left 0.2s ease",
   },
 
-  // 💝 CARD STYLES
+  // 💝 CARD
   card: {
     background: "white",
-    borderRadius: "16px",
+    borderRadius: "18px",
     padding: "20px",
-    width: "320px",
+    width: "100%",
+    maxWidth: "340px",
     textAlign: "center",
     boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
-    animation: "fadeIn 0.6s ease",
   },
 
   image: {
     width: "100%",
-    borderRadius: "12px",
-    marginBottom: "12px",
+    borderRadius: "14px",
+    marginBottom: "14px",
     objectFit: "cover",
   },
 };
