@@ -11,14 +11,6 @@ export default function Valentine() {
     left: "50%",
   });
 
-  const backgrounds = [
-    "linear-gradient(135deg, #ff9a9e, #fad0c4)",
-    "linear-gradient(135deg, #fbb1bd, #e6c9c0)",
-    "linear-gradient(135deg, #d8b4b4, #c9c9c9)",
-    "linear-gradient(135deg, #b0b0b0, #9e9e9e)",
-    "linear-gradient(135deg, #7a7a7a, #5f5f5f)",
-    "linear-gradient(135deg, #3a3a3a, #1f1f1f)",
-  ];
 
   const handleNoHover = () => {
     setSadLevel((prev) => Math.min(prev + 1, 5));
@@ -37,7 +29,7 @@ export default function Valentine() {
     <div
       style={{
         ...styles.container,
-        background: backgrounds[sadLevel],
+        background: "linear-gradient(135deg, #ff9a9e, #fad0c4)",
       }}
     >
       {!accepted ? (
@@ -59,12 +51,12 @@ export default function Valentine() {
                 top: noMoved ? noPosition.top : undefined,
                 left: noMoved ? noPosition.left : undefined,
                 transform: noMoved ? "translate(-50%, -50%)" : "none",
-                opacity: sadLevel === 5 ? 0.4 : 1,
+                opacity: sadLevel === 6? 0.4 : 1,
               }}
-              onMouseEnter={sadLevel < 5 ? handleNoHover : undefined}
-              disabled={sadLevel === 5}
+              onMouseEnter={sadLevel < 6 ? handleNoHover : undefined}
+              disabled={sadLevel === 6}
             >
-              No {["💔", "😟", "😞", "😢", "😭", "🖤"][sadLevel]}
+              No {["💔", "😟", "😞", "😢", "😭", "😛"][sadLevel]}
             </button>
           </div>
         </>
@@ -107,6 +99,8 @@ const styles = {
   },
 
   yesButton: {
+    
+    //position: "fixed",
     padding: "12px 26px",
     fontSize: "18px",
     borderRadius: "10px",
